@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了正文经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下（1）日志分析（2）入侵检测好了不废话了，直接放题（两个小时）时间算是有点长了，但对于我这种小菜鸡来说依旧不够用 刚看到题目，什么？网站被黑了，卧槽 ，这谁顶得住没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(二面)智邮普创工作室2019秋季纳新题 (运维安全方向)浅析">
+<meta property="og:url" content="http://yoursite.com/2020/02/12/(%E4%BA%8C%E9%9D%A2)%E6%99%BA%E9%82%AE%E6%99%AE%E5%88%9B%E5%B7%A5%E4%BD%9C%E5%AE%A42019%E7%A7%8B%E5%AD%A3%E7%BA%B3%E6%96%B0%E9%A2%98%20(%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8%E6%96%B9%E5%90%91)%E6%B5%85%E6%9E%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了正文经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下（1）日志分析（2）入侵检测好了不废话了，直接放题（两个小时）时间算是有点长了，但对于我这种小菜鸡来说依旧不够用 刚看到题目，什么？网站被黑了，卧槽 ，这谁顶得住没">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023220023213.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023220026913.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023221417628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023221944248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023222442738.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023222907318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023223825783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023224342150.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023224703594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023225858208.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023230903333.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023230949723.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023231515646.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023232755956.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191024085056911.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023234601450.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191023234704909.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191024091600353.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191024092203916.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191024092421119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191024092530826.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019102409260639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191024092657693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2020-02-12T06:11:38.460Z">
+<meta property="article:modified_time" content="2020-02-12T09:46:12.417Z">
+<meta property="article:author" content="小灰灰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191023220023213.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/12/(二面)智邮普创工作室2019秋季纳新题 (运维安全方向)浅析/"/>
+
+
+
+
+
+  <title>(二面)智邮普创工作室2019秋季纳新题 (运维安全方向)浅析 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于我">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/12/(%E4%BA%8C%E9%9D%A2)%E6%99%BA%E9%82%AE%E6%99%AE%E5%88%9B%E5%B7%A5%E4%BD%9C%E5%AE%A42019%E7%A7%8B%E5%AD%A3%E7%BA%B3%E6%96%B0%E9%A2%98%20(%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8%E6%96%B9%E5%90%91)%E6%B5%85%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小灰灰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">(二面)智邮普创工作室2019秋季纳新题 (运维安全方向)浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-12T14:11:38+08:00">
+                2020-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%9D%82%E5%BD%95/" itemprop="url" rel="index">
+                    <span itemprop="name">学习杂录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了"><a href="#是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了" class="headerlink" title="是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了"></a>是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了</h3><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h5 id="经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下"><a href="#经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下" class="headerlink" title="经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下"></a>经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下</h5><h6 id="（1）日志分析"><a href="#（1）日志分析" class="headerlink" title="（1）日志分析"></a>（1）日志分析</h6><h6 id="（2）入侵检测"><a href="#（2）入侵检测" class="headerlink" title="（2）入侵检测"></a>（2）入侵检测</h6><h4 id="好了不废话了，直接放题（两个小时）"><a href="#好了不废话了，直接放题（两个小时）" class="headerlink" title="好了不废话了，直接放题（两个小时）"></a>好了不废话了，直接放题（两个小时）</h4><p><strong>时间算是有点长了，但对于我这种小菜鸡来说依旧不够用</strong><br><img src="https://img-blog.csdnimg.cn/20191023220023213.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191023220026913.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h6 id="刚看到题目，什么？网站被黑了，卧槽-，这谁顶得住"><a href="#刚看到题目，什么？网站被黑了，卧槽-，这谁顶得住" class="headerlink" title="刚看到题目，什么？网站被黑了，卧槽 ，这谁顶得住"></a>刚看到题目，什么？网站被黑了，<del>卧槽</del> ，这谁顶得住</h6><p><strong>没学过呀，这咋整，我太难了，凉凉</strong><br><strong>然后整个过程就很痛苦，这种感觉只有经历过的人才知道吧。</strong></p>
+<h5 id="然后"><a href="#然后" class="headerlink" title="然后"></a>然后</h5><h5 id="开始冷静分析吧。。。。"><a href="#开始冷静分析吧。。。。" class="headerlink" title="开始冷静分析吧。。。。"></a>开始冷静分析吧。。。。</h5><p><strong>0x01</strong> win下打开远程，输上账号密码，直连进去后，找日志</p>
+<p><strong>0x02</strong> 网站是用<strong>phpstudy</strong>搭建的，网站日志默认在<br>（请注意看这里，phpstudy加粗体，因为后面还要用到这玩意，先做个铺垫）</p>
+<p>phpstudy\PHPTutorial\Apache\logs</p>
+<p>这个目录下<br>里面有两个文件</p>
+<p><img src="https://img-blog.csdnimg.cn/20191023221417628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>一个是正常相应请求的，一个是错误<br>打开error.log，截图如下<br><strong>（因现在非现场环境，加之当时做题，现场未保留截图，只能简略，尽可能滴无限接近模拟现场环境）</strong><br><img src="https://img-blog.csdnimg.cn/20191023221944248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h5 id="日志嘛，大概就长这样"><a href="#日志嘛，大概就长这样" class="headerlink" title="日志嘛，大概就长这样"></a>日志嘛，大概就长这样</h5><p>打开一后，更慌了，这tm，9000多行日志，这谁顶得住，跟我同行的另一个人也才400多行啊。<strong>洗洗睡吧</strong><br><img src="https://img-blog.csdnimg.cn/20191023222442738.jpg" alt="在这里插入图片描述"><br>。。。。。。。。。。。。。。。。。<br>在经历了半个多小时毫无进展，彭哥哥给了第一点提示。<br>“你看这是啥”<br><img src="https://img-blog.csdnimg.cn/20191023222907318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>“你再看这是啥”<br><img src="https://img-blog.csdnimg.cn/20191023223825783.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>“你能想到啥，这个页面能干嘛”<br><strong>卧槽，弱口令。。。。</strong><br><strong>0x03</strong> root / root 进去后 ，这个页面<br><img src="https://img-blog.csdnimg.cn/20191023224342150.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>（ps：这里你可能会问，为什么会想到进phpmyadmin这里呢?）<br><strong>其一</strong> 日志里面有大量含有phpmyadmin  url的请求<br>如下图<br><img src="https://img-blog.csdnimg.cn/20191023224703594.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>其二</strong> 这是渗透的正常思路，一般都要先看看phpmyadmin这个存不存在，有的话，直接弱口令或者去爆破</p>
+<p><strong>0x04</strong><br><img src="https://img-blog.csdnimg.cn/20191023225858208.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>还要在这里把日志名后缀改成 <strong>.php</strong><br>然后 这里执行sql语句<br><img src="https://img-blog.csdnimg.cn/20191023230903333.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191023230949723.png" alt="在这里插入图片描述"><br>一句话马写好了，让我们来看一下<br><img src="https://img-blog.csdnimg.cn/20191023231515646.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>菜刀直连即可<strong>为所欲为</strong></p>
+<h5 id="小插曲"><a href="#小插曲" class="headerlink" title="小插曲"></a>小插曲</h5><p>9000多行日志不是盖的，看了一下里面包含了<strong>AWVS</strong>的各种扫描，可能是出题人故意混淆的，增加难度，笔者就是这样被耽误了好长时间<br><strong>唉，毕竟还是菜嘛</strong></p>
+<h4 id="至此，日志分析部分浅析到此为止告一段落"><a href="#至此，日志分析部分浅析到此为止告一段落" class="headerlink" title="至此，日志分析部分浅析到此为止告一段落"></a>至此，日志分析部分浅析到此为止告一段落</h4><p><strong>0x05</strong><br><strong>net user</strong> 一下<br>发现新增了一个<strong>hack用户</strong><br><strong>我本以为</strong>菜刀连进去后，直接system权限，然后cmd直接添加就好了的。。<br>然后帅气的彭哥哥说不对，你再想想，给我找到<strong>hack用户</strong>的<strong>密码</strong>，今天就算结束了<br>然后又一个误区，一想到添加用户，我居然在系统日志里面又浪费掉了宝贵的半个小时。。。太难了我<br>系统日志大概长这样<br><img src="https://img-blog.csdnimg.cn/20191023232755956.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>遗憾的是这里用不到它<br>这时彭哥哥给了第二点提示，<strong>phpstudy</strong>最近被曝的<strong>后门</strong><br>其实这个后门我是之前玩过的，在本地把两个有问题的文件中的eval字符串给删了<br><img src="https://img-blog.csdnimg.cn/20191024085056911.png" alt="在这里插入图片描述"><br><strong>但遗憾的是</strong>，直到最后结束我也还是没能把<strong>密码</strong>给找出来<br><strong>这种无奈只有自己最清楚吧</strong></p>
+<h4 id="下面就直接分析了"><a href="#下面就直接分析了" class="headerlink" title="下面就直接分析了"></a>下面就直接分析了</h4><p><strong>0x06</strong> <strong>phpstudy后门</strong><br><img src="https://img-blog.csdnimg.cn/20191023234601450.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191023234704909.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>重点是下面两个字段<br><img src="https://img-blog.csdnimg.cn/20191024091600353.png" alt="在这里插入图片描述"><br><strong>问</strong>：怎么想到的？<br><strong>答</strong>：同上文，日志里有很多Accept-charset:字样<br>好了，在请求包里加上Accept-charset:这个字段，并用base64加密你想执行的命令<br>如下<br><img src="https://img-blog.csdnimg.cn/20191024092203916.png" alt="在这里插入图片描述"><br>添加到这里<br><img src="https://img-blog.csdnimg.cn/20191024092421119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后发送，<strong>看一下效果</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20191024092530826.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/2019102409260639.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>在本地执行，对比一下<br><img src="https://img-blog.csdnimg.cn/20191024092657693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>原理大概就是这样</strong><br><strong>0x07</strong><br>在日志里找到相应的base64密文，解密即可，<strong>秒出</strong>密码</p>
+<h4 id="二面之心得"><a href="#二面之心得" class="headerlink" title="二面之心得"></a>二面之心得</h4><p>二面给我的打击是难以想象的。这样的经历，有一次大概也就足够了<br>尽管自以为对各种漏洞原理都很熟悉了，但对常规思路还有一些技巧尚未掌握<br>后续仍需加强，对近期漏洞也需不断关注<br><strong>学到了什么，反思到了什么，暴漏出自己的问题所在，不断改进，进步，我觉得这些比面试本身更有意义。</strong><br><strong>我思故我在</strong></p>
+<h4 id="后序"><a href="#后序" class="headerlink" title="后序"></a>后序</h4><p>二面意外的过了，三面给挂了<br>三面没问技术，负责人只是简单问了一些其他的问题。<br>问我 个人说明为什么是 腰有十文，振衣作响<br>问我 为什么群名备注叫 李得胜<br>。。。。。。。。。。。。。。。。。。。。。。。<br>可能是我太<strong>皮</strong>了，不够稳，或许二面的失利，丢失了一部分信心，导致三面各种答不上。。。<br>归根结底就是自己太菜了<br>怪不得别人</p>
+<h4 id="写在最后的话"><a href="#写在最后的话" class="headerlink" title="写在最后的话"></a>写在最后的话</h4><p>很高兴你能看到这里，智邮普创是一个很好的实验室，不管你这次纳新有没有抓住机会，拿到offer，都是一次弥足珍贵的经历，希望你曾在此过程中有所付出，有所收获，有所进步，有所成长。。。<br>面试过了的话，请你务必珍惜这宝贵的机会，因为这是很多人想要，却不可求的。<br>面试没有过的话，也不要气馁，这并不能证明你自己不够优秀。吸取经验，不断进步，在下次纳新中取得好成绩。</p>
+<h4 id="就这样吧。。。"><a href="#就这样吧。。。" class="headerlink" title="就这样吧。。。"></a>就这样吧。。。</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/12/%E6%99%BA%E9%82%AE%E6%99%AE%E5%88%9B%E5%B7%A5%E4%BD%9C%E5%AE%A42019%E7%A7%8B%E5%AD%A3%E7%BA%B3%E6%96%B0%E9%A2%98%20(%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8%E6%96%B9%E5%90%91)%E6%B5%85%E6%9E%90/" rel="next" title="智邮普创工作室2019秋季纳新题 (运维安全方向)浅析">
+                <i class="fa fa-chevron-left"></i> 智邮普创工作室2019秋季纳新题 (运维安全方向)浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小灰灰" />
+            
+              <p class="site-author-name" itemprop="name">小灰灰</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wikeys.github.io/" title="彭哥哥的博客" target="_blank">彭哥哥的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了"><span class="nav-number">1.</span> <span class="nav-text">是时候给二面做一个总结了，尽管三面也结束了，最近一段时间比较忙，加之最近电脑借给朋友用了，所以博客拖的时间就比较长了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number"></span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下"><span class="nav-number">0.0.1.</span> <span class="nav-text">经过一面的洗礼，知道了自己的不足，以及知识的盲点，终于在上周三，从我彭哥哥那里，打听到有关二面的通知。据悉考察点如下</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#（1）日志分析"><span class="nav-number">0.0.1.1.</span> <span class="nav-text">（1）日志分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#（2）入侵检测"><span class="nav-number">0.0.1.2.</span> <span class="nav-text">（2）入侵检测</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好了不废话了，直接放题（两个小时）"><span class="nav-number">0.1.</span> <span class="nav-text">好了不废话了，直接放题（两个小时）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#刚看到题目，什么？网站被黑了，卧槽-，这谁顶得住"><span class="nav-number">0.1.0.1.</span> <span class="nav-text">刚看到题目，什么？网站被黑了，卧槽 ，这谁顶得住</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#然后"><span class="nav-number">0.1.1.</span> <span class="nav-text">然后</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开始冷静分析吧。。。。"><span class="nav-number">0.1.2.</span> <span class="nav-text">开始冷静分析吧。。。。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#日志嘛，大概就长这样"><span class="nav-number">0.1.3.</span> <span class="nav-text">日志嘛，大概就长这样</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小插曲"><span class="nav-number">0.1.4.</span> <span class="nav-text">小插曲</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#至此，日志分析部分浅析到此为止告一段落"><span class="nav-number">0.2.</span> <span class="nav-text">至此，日志分析部分浅析到此为止告一段落</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下面就直接分析了"><span class="nav-number">0.3.</span> <span class="nav-text">下面就直接分析了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二面之心得"><span class="nav-number">0.4.</span> <span class="nav-text">二面之心得</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序"><span class="nav-number">0.5.</span> <span class="nav-text">后序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写在最后的话"><span class="nav-number">0.6.</span> <span class="nav-text">写在最后的话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#就这样吧。。。"><span class="nav-number">0.7.</span> <span class="nav-text">就这样吧。。。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小灰灰</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

